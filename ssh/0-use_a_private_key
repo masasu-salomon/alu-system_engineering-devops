@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-# Connects to the server using the private key ~/.ssh/school as user ubuntu
-ssh -i ~/.ssh/school ubuntu@8.8.8.8
+# This script connects to a remote server using an RSA private key.
+
+ssh -i ~/.ssh/school ubuntu@01d0338faf2c.7c3476c2.alu-cod.online
+
