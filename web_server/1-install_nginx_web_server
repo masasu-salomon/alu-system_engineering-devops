@@ -6,6 +6,6 @@ apt-get install -y nginx
 # Ensure correct ownership for the web root directory
 chown -R www-data:www-data /var/www/html
 # Overwrite the default Nginx page with the required content
-echo "Holberton School for the win!" | sudo tee /var/www/html/index.html > /dev/null
+echo "Holberton School" | sudo tee /var/www/html/index.html > /dev/null
 # Restart Nginx properly
 sudo service nginx restart
