@@ -1,43 +1,11 @@
 #!/usr/bin/env bash
-# Automatically installs and configures Nginx on Ubuntu 16.04
-
 # Update package lists
-apt-get update -qq
-
-# Install Nginx silently
-DEBIAN_FRONTEND=noninteractive apt-get install -y nginx > /dev/null
-
-# Create web root directory if missing
-mkdir -p /var/www/html
-
-# Create index.html with required content
-echo "Holberton School" > /var/www/html/index.html
-
-# Configure Nginx default site
-cat > /etc/nginx/sites-available/default <<'EOF'
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html;
-
-    server_name _;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-}
-EOF
-
-# Validate configuration
-nginx -t > /dev/null 2>&1
-
-# Ensure proper permissions
+apt-get update -y
+# Install Nginx
+apt-get install -y nginx
+# Ensure correct ownership for the web root directory
 chown -R www-data:www-data /var/www/html
-
-# Restart Nginx service
-service nginx restart > /dev/null
-
-# Allow HTTP traffic
-ufw allow 'Nginx HTTP' > /dev/null 2>&1 || true
+# Overwrite the default Nginx page with the required content
+echo "Holberton School for the win!" | sudo tee /var/www/html/index.html > /dev/null
+# Restart Nginx properly
+sudo service nginx restart
